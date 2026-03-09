@@ -7,7 +7,7 @@ I regularly shop on Amazon, just like millions of people around the world. Wheth
 
 As someone who carefully checks product reviews and quality before making a purchase, I became curious about what actually drives those rankings. Some products with thousands of reviews dominate their categories, while others with fewer reviews still manage to rank highly. In some cases, higher-priced products ranked lower, while cheaper products ranked higher. Observing these inconsistencies made me realize that there must be hidden patterns and underlying factors that determine why certain products become best sellers. 
 
-To analyze, I came up with questions such as:
+To analyze, I came up with 4 main questions:
 * Do higher product ratings actually drive sales popularity?
 * Which Brands dominate Best-seller rankings across different categories?
 * Are best-sellers driven by competitive pricing or brand power?
