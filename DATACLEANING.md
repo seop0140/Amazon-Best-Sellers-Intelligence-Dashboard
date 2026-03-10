@@ -35,16 +35,34 @@
 # Data Cleaning Process log
 
 ### Removing Unnecessary Columns
-In the beginning of the data cleaning process, I have decided to drop the columns that is not meaningful for analysis such as:
-* **URL & imageURL**: URL of product page/image is not needed
-* **scrapedDate**: Date when the data is scraped is not needed
-* **description & descriptionRaw**: Description of products are not needed
-These were done using Power Query Editor in Excel, I decided to keep the other columns for now to see if they can be used to do further analysis.
+In the beginning of the data cleaning process, I have decided to drop the columns that is not meaningful for analysis. The columns being kept for analysis are:
+* **rating**: Needed for rating vs popularity analysis
+* **reviewCount**: Proxy for sales popularity
+* **brandName**: Needed for brand dominance analysis
+* **nodeName**: Category comparison
+* **listedPrice**: Original pricing
+* **salePrice**: Discount / competitive pricing
+* **name**: Detect bundled products
+* **features**: Sometimes indicates bundles
+* **weight_unit**: Needed for converting weight values
+* **weight_value**: Needed for converting weight values
+* **variants**: Needed for evaluating attributes of products
+
+Note: Some columns in the **amazon_dataset_pandas** csv file was kept to show values transferred to corresponding column
 
 ### Removing null values, misplaced values on listedPrice and SalePrice
-If there are null values on both listed price and sales price, my analysis cannot be answered. While examining the columns I also found out there were misplaced values inside salePrice column which was meant to be in other columns. Thankfully, these misplaced values existed in their correct columns, it was just an error during the data scraping. By using Python(Pandas), missing/wrong values listedPrice column were filled using the corresponding salePrice values, if they had one. Rows with both prices missing were removed to maintain pricing integrity for analysis.
+If there are null values on both listed price and sales price, my analysis cannot be answered. While examining the columns I also found out there were misplaced values inside **salePrice** column which was meant to be in other columns. Thankfully, these misplaced values existed in their correct columns, it was just an error during the data scraping. By using Python(Pandas), missing/wrong values **listedPrice** column were filled using the corresponding **salePrice** values, if they had one. Rows with both prices missing were removed to maintain pricing integrity for analysis.
 
-### Converting Weight unit, value
+### Converting Weight value
+Since the dataset was sourced from Amazon US, product weights were recorded in pounds and ounces. With Power Query, these values were standardized by converting all weights into grams to ensure consistency and simplify future analysis.
 
 
-### Dealing with Errors in reviewCount and rating
+### Misplaced values in gtin
+Some values in the **gtin** column contained misplaced values that were intended for the **nodeName** column. These values were transferred to correct column for the accurate data alignment.
+
+### Inconsistent names in brandName
+The **brandName** column contained inconsistent values, while some values were in their correct brand name, some values started with **Brand:** prefix, some with not even a correct brand name. With Power Query, I splitted prefix, and rows with unresolvable values were replaced with "Unknown Brand" in a new column **brandName_cleaned**. 
+
+
+### Splitting the JSON list in the Variants column
+The **variants** column contained JSON-like lists representing product attributes such as colour and size. In case I needed the "size" attribute for my future analysis, I decided to use Pandas in Python to parse the JSON strings and extract individual attributes. The issue here was since each product contained multiple values of attributes, there will be huge amount of row duplication. To resolve this, I decided to assign each product a **product id**, and make a new csv file called **variants_table** which will be linked with **product_id** with a **products_table** csv.
