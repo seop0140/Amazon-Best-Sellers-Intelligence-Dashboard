@@ -2,6 +2,7 @@ import pandas as pd
 
 df = pd.read_csv("amazon_dataset.csv", encoding="latin1")
 
+
 #Function to check if the row contains numeric values or not
 def is_number(x):
     try:
@@ -27,6 +28,7 @@ df_clean = df[df['listedPrice'].notnull()]
 
 df_clean = df_clean.reset_index(drop=True)
 
+df_clean['product_id'] = range(1, len(df) + 1)
 #Checking how many rows were dropped
 print(f"Cleaned dataset has {len(df_clean)} rows")
 
