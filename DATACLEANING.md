@@ -56,19 +56,20 @@ If there are null values on both listed price and sales price, my analysis canno
 ### Converting Weight value
 Since the dataset was sourced from Amazon US, product weights were recorded in pounds and ounces. With Power Query, these values were standardized by converting all weights into grams to ensure consistency and to help with my future analysis.
 
-
 ### Misplaced values in gtin column
 Some values in the **gtin** column contained misplaced values that were intended for the **nodeName** column. These values were transferred to correct column for the accurate data alignment.
 
 ### Inconsistent names in brandName column
 The **brandName** column contained inconsistent values, while some values were in their correct brand name, some values started with **Brand:** prefix, some with not even a correct brand name. With Power Query, I splitted prefix, and rows with unresolvable values were replaced with "Unknown Brand" in a new column **brandName_cleaned**. 
 
-
 ### nodeName cleaning
 Due to a common web-scraping issue, some values that were intended for the nodeName column were incorrectly placed in the gtin column. Using Power Query, a new column called nodeName_cleaned was created to correct and consolidate the category information. To simplify the category structure for analysis, only the top-level product category was extracted from the hierarchical path. This was done by creating a product_category column using the Text Before Delimiter transformation.
 
+### Bundle Type classification
+The Features column contained the information about the type of bundled product. To help myself with analysis, I created a new column called **bundle_type** which classifies each product by its bundle type using Power Query.   
+
 ### Splitting the JSON list in the variants column
-The **variants** column contained JSON-like lists representing product attributes such as colour and size. In case I needed the "size" attribute for my future analysis, I decided to use Pandas in Python to parse the JSON strings and extract individual attributes. The issue here was since each product contained multiple variant attributes, which lead to significant row duplication if stored directly in the main dataset. To resolve this, I decided to assign each product a **product id**, and make a new csv file called **variants_table** which will be linked with **product_id** with a **products_table** csv. In the **variants_table**, each variant is stored with their own **variant_id**, and the **product_id** is used as foreign key to establish the relationship between two tables. This structure dreduces redundancy and creates a cleaner relational model that is easier to query and analyze. 
+The **variants** column contained JSON-like lists representing product attributes such as colour and size. In case I needed the "colour" attribute for my future analysis, I decided to use Pandas in Python to parse the JSON strings and extract individual attributes. The issue here was since each product contained multiple variant attributes, which lead to significant row duplication if stored directly in the main dataset. To resolve this, I decided to assign each product a **product id**, and make a new csv file called **variants_table** which will be linked with **product_id** with a **products_table** csv. In the **variants_table**, each variant is stored with their own **variant_id**, and the **product_id** is used as foreign key to establish the relationship between two tables. This structure dreduces redundancy and creates a cleaner relational model that is easier to query and analyze. After the **variants_table** csv file was made, the column **size** was dropped as it did not help with my analysis, and this was created into a new csv file **variants_table_cleaned**. 
 #### ERD diagram showing the entity relationship between **amazon_dataset_pandas**, **products_table** and **variants_table**:
 ![alt text](Images/ERD_diagram.png)
 

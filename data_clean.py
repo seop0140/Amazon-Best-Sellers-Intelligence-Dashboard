@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("amazon_dataset.csv", encoding="latin1")
+df = pd.read_csv("Dataset/amazon_dataset.csv", encoding="latin1")
 
 
 #Function to check if the row contains numeric values or not

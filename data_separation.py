@@ -1,12 +1,12 @@
 import pandas as pd
 import ast
 
-df = pd.read_csv("amazon_dataset_pandas.csv", encoding="latin1")
+df = pd.read_csv("Dataset/amazon_dataset_pandas_final.csv", encoding="latin1")
 
 
 # Set only needed columns for the product csv
 products_columns = ["product_id", "name_cleaned", "brandName_cleaned", "product_category", "rating", "reviewCount", "listedPrice", "salePrice",
-                 "features", "weight_value", "weight_unit", "weight_converted"]
+                  "weight_value", "weight_unit", "weight_converted", "bundle_type"]
 df_products = df[products_columns]
 
 # Function for going through the values in the variant column
