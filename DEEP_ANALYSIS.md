@@ -52,9 +52,11 @@ Pricing and brand reputation are two key factors that influence consumer buying 
 
 ![alt text](Images/q3d1.png)
 
-I fit a scatter plot to show the relationship between discount percentage (listedPrice - salesPrice) / listedPrice and total review count, again I decided to apply log scale for easier pattern interpretation.
+I fit a scatter plot to show the relationship between discount percentage (listedPrice - salesPrice) / listedPrice and total review count, again I decided to apply log scale for easier pattern interpretation. 
 
 ![alt text](Images/q3d2.png)
+
+Here the outlier was removed from the plot to prevent the distortion of the axis scale.This ensured the distribution and trends of the remaining data points to be more clearly interpreted.
 
 #### Observations:
 

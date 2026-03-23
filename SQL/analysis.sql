@@ -1,9 +1,9 @@
 -- Q1 Do higher product ratings actually drive sales popularity?
 SELECT 
-    rating,
+    ROUND(rating, 1) AS rating,
     COUNT(product_id) AS product_count,
     SUM(reviewCount) AS total_reviews,
-    AVG(reviewCount) AS avg_reviews,
+    ROUND(AVG(reviewCount), 0) AS avg_reviews,
     MAX(reviewCount) AS max_reviews
 FROM products
 WHERE rating IS NOT NULL
@@ -18,7 +18,7 @@ SELECT
     brandName_cleaned AS brand_name,
     COUNT(product_id) AS product_count,
     SUM(reviewCount) AS total_reviews,
-    AVG(rating) AS avg_rating
+    ROUND(AVG(rating), 1) AS avg_rating
 FROM products
 GROUP BY brandName_cleaned
 ORDER BY product_count DESC
