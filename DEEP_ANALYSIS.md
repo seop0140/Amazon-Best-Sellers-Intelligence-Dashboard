@@ -20,10 +20,15 @@ To visualize this question, I created a scatter plot using product rating on the
 
 After applying log scale on the graph, the pattern and correlation became much easier to interpret. 
 
-#### Observations:
-* **Positive, but weak correlation:**  There is a wide scatter of points following a positive trendline, indicating that rating **alone** does not strongly drive popularity.
-* **Most products with a high number of reviews have ratings above 4.0 stars.** This suggests a social proof feedback loop: people prefer to buy products that are well-made, and a high rating increases visibility, which in turn leads to more reviews.
-* **Many highly rated products still receive relatively few reviews.**  This observation directly supports the weak correlation seen on the scatter plot, it proves that **high rating** is not a guaranteed factor for popularity. Even products rated with 5 star could remain low review counts. 
+To further examine the relationship between product ratings and product reviews, the dataset was aggregated at the product level using **product_id**. The average rating and total number reviews were calculated for each product.
+
+![alt text](Images/pearson_correlation.png)
+
+Here shows a summary of pearson correlation test done using R in RStudio. As the p-value is less than 0.05 and r = 0.057(2 d.p), the results show a statistically significant but very weak positive correlation between average rating and total review count. This indicates that while higher-rated products tend to have slightly more reviews, the strength of this relationship is very weak. This shows rating alone does not strongly influence product popularity. Other factors such as brand recognition, product visibility and exceptional marketing strategies could show higher influence in product popularity. An important idea to consider here is since the sample size is very large(More than 25k+ products), the statistical significance is highly likely to be driven by it, rather than a meaningful relationship between the two variables.
+
+**Most products with a high number of reviews have ratings above 4.0 stars.** This suggests a social proof feedback loop: people prefer to buy products that are well-made, and a high rating increases visibility, which in turn leads to more reviews.
+
+**Many highly rated products still receive relatively few reviews.**  This observation directly supports the weak correlation seen on the scatter plot, it proves that **high rating** is not a guaranteed factor for popularity. Even products rated with 5 star could remain low review counts. 
 
 
 ## 2. Which Brands dominate Best-seller rankings across different categories?
@@ -43,9 +48,11 @@ It can be observed that the brand with the highest number of products in the bes
 ![alt text](Images/q2_top_10_brand_dominance_cateogories.png)
 
 #### Observations:
-* **Amazon's private labels(Amazon Music, Audible, Amazon Basics) dominate**  categories for curated or proprietary products.
-* **In niche or specialized categories such as Automotive, Books, and CDs & Vinyl, a single brand often dominates**, likely reflecting higher popularity or stronger brand loyalty within these markets.
+* **Amazon's private labels(Amazon Music, Audible, Amazon Basics) dominate**  categories for curated or proprietary products. With Amazon-owned brands consistenyl appearing among the top positions in categories such as digital media and platform controlled products, these brands benefit themselves, while making it difficult for other competitors to gain attraction in these categories. 
+* **In niche or specialized categories such as Automotive, Books, and CDs & Vinyl, a single brand often dominates**. Strong brand loyalty plays a key role in markets that are in niche, suggesting that other brands must show different aspects, something special about them for an effective competition.
 * **In contrast, utility categories like Grocery, Kitchen, and Home are less saturated, showing a more fragmented brand distribution.** This shows that having a lot of products in one category such as Audible in Books, doesn’t mean a brand will succeed in other categories; people tend to stick to brands based on the specific need they have.
+
+Overall, brand influence is higly category-dependent, and marketing strategies for brand growth should be modified accordingly, rather than applying same strategies across all categories.
 
 ## 3. Are best-sellers driven by competitive pricing or brand power?
 Pricing and brand reputation are two key factors that influence consumer buying behaviour. This question explores whether best-selling products achieve their status due to lower, more competitive prices, or whether strong brand recognition allows products to succeed regardless of pricing.
@@ -82,7 +89,7 @@ We can see that **Multipack** with a value of 19.5k reviews, suggesting that cus
 Here shows the graph of product count by bundle type. We can observe that **non-bundled(single-item) products dominate** with a value of 17.1k. This is followed by **set** and **pack** categories, which represent a smaller but still noticeable portion of products. In contrast, all other bundle types are relatively uncommon.
 
 #### Overall observations:
-* **Single-item products dominate in volume**, indicating that there are lot of sales of individual products rather than as bundles. This suggests simplicity in purhcasing and listign is still the standard approach in the marketplace.
+* **Single-item products dominate in volume**, indicating that there are lot of sales of individual products rather than as bundles. This suggests simplicity in purchasing and listing is still the standard approach in the marketplace.
 * **Multipacks generate significantly higher average reviews**, shows that although their presence may be low in best-sellers ranking, they attract much stronger engagement and more likely to perform well.
 * **Smaller bundles(Assortment, duo, trio) products underperform within the best-sellers**, implying that they may nto provide enough value compared to larger bulk offerings.
 
